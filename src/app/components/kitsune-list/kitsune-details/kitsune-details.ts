@@ -1,7 +1,7 @@
 import { Component, inject, computed, signal, effect } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Kitsunes } from '../services/kitsune';
+import { Kitsunes } from '../../../services/kitsune';
 
 @Component({
   selector: 'app-kitsune-details',
@@ -15,13 +15,12 @@ export class KitsuneDetails {
   private router = inject(Router);
   private kitsunesService = inject(Kitsunes);
 
-  // Routage réactif
   private paramMap = toSignal(this.route.paramMap);
   
-  // État dérivé : le nom dans l'URL
+  // récupération du nom du kitsune
   nomKitsune = computed(() => this.paramMap()?.get('nom'));
 
-  // État dérivé : le Kitsune trouvé dans le signal du service
+  // Kitsune trouvé dans le signal du service
   kitsune = computed(() => {
     const nom = this.nomKitsune();
     return nom ? this.kitsunesService.liste().find(k => k.nom === nom) : undefined;
@@ -36,10 +35,9 @@ export class KitsuneDetails {
       const nom = this.nomKitsune();
       const k = this.kitsune();
       
-      // Si un nom est présent dans l'URL mais que k est introuvable, on redirige
       if (nom && !k) {
         this.router.navigate(['/introuvable'], { replaceUrl: true });
-        return; // On arrête l'exécution ici
+        return; 
       }
 
       if (k && this.compteurClics() === 0) {
@@ -48,7 +46,7 @@ export class KitsuneDetails {
     }, { allowSignalWrites: true });
   }
 
-  // État dérivé : le bouton est-il désactivé ?
+  // bouton désactivé ?
   boutonDesactive = computed(() => {
     const k = this.kitsune();
     if (!k) return true;
@@ -66,7 +64,6 @@ export class KitsuneDetails {
     
     const chance = Math.random();
     if (chance <= 0.25) {
-      // La mutation passe par le service
       this.kitsunesService.activerBoost(k.nom);
     }
   }

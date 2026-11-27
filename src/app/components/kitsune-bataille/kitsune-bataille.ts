@@ -1,6 +1,6 @@
 import { Component, inject, signal, computed } from '@angular/core';
-import { Kitsunes } from '../services/kitsune';
-import { Kitsune } from '../models/kitsune';
+import { Kitsunes } from '../../services/kitsune';
+import { Kitsune } from '../../models/kitsune';
 
 @Component({
   selector: 'app-kitsune-bataille',

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Kitsunes } from '../services/kitsune';
+import { Kitsunes } from '../../services/kitsune';
 
 @Component({
   imports: [RouterLink],

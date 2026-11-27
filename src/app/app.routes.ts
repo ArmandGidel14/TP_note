@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { KitsuneListe } from './kitsune-list/kitsune-list';
-import { KitsuneDetails } from './kitsune-details/kitsune-details';
-import { KitsuneAjout } from './kitsune-ajout/kitsune-ajout';
-import { KitsuneIntrouvable } from './kitsune-introuvable/kitsune-introuvable';
-import { KitsuneBataille } from './kitsune-bataille/kitsune-bataille';
+import { KitsuneListe } from './components/kitsune-list/kitsune-list';
+import { KitsuneDetails } from './components/kitsune-list/kitsune-details/kitsune-details';
+import { KitsuneAjout } from './components/kitsune-ajout/kitsune-ajout';
+import { KitsuneIntrouvable } from './components/kitsune-introuvable/kitsune-introuvable';
+import { KitsuneBataille } from './components/kitsune-bataille/kitsune-bataille';
 // Importe ton composant NotFound quand il sera créé (Écran Kitsune introuvable)
 
 export const routes: Routes = [
