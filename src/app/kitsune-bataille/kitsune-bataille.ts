@@ -46,7 +46,7 @@ export class KitsuneBataille {
 
     const [k1, k2] = this.selection();
     
-    // Clonage local avec calcul du boost (PV doublés temporairement pour le combat)
+    // Clonage local + pv doublé si boosté
     let c1 = { ...k1, pvActuels: k1.boost ? k1.pv * 2 : k1.pv };
     let c2 = { ...k2, pvActuels: k2.boost ? k2.pv * 2 : k2.pv };
 

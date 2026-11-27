@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormRoot, FormField, form, required, minLength } from '@angular/forms/signals';
+import { FormRoot, FormField, form, required, maxLength, max} from '@angular/forms/signals';
 import { Kitsunes } from '../services/kitsune';
 import { Kitsune } from '../models/kitsune';
 
@@ -27,12 +27,20 @@ export class KitsuneAjout {
   // Initialisation du Signal Form
   form = form(this.model, 
     (schema) => {
-      required(schema.nom, {message:'Le nom est obligatoire !'})
-      // minLength(schema.nom, 5,{message:'Le nom doit faire 5 lettres minimum !'})
-      required(schema.description, {message:'La description est obligatoire !'})
-      required(schema.pv)
-      required(schema.force)
-      required(schema.vitesse)
+      required(schema.nom, {message:'Le nom est obligatoire !'});
+      maxLength(schema.nom, 100, {message:'le nom ne peut pas dépasser 100 caractère'});
+      
+      required(schema.description, {message:'La description est obligatoire !'});
+      maxLength(schema.description, 10000, {message:'la description ne peut pas dépasser 10000 caractère'});
+      
+      required(schema.pv, {message:'Le nombre de pv est obligatoire !'});
+      max(schema.pv, 1000, {message:'le nombre de pv ne peut pas dépasser 1000'});
+      
+      required(schema.force, {message:'La force est obligatoire !'});
+      max(schema.force, 1000, {message:'La force ne peut pas dépasser 1000'});
+      
+      required(schema.vitesse, {message:'La vitesse est obligatoire !'});
+      max(schema.vitesse, 1000, {message:'La vitesse ne peut pas dépasser 1000'});
     },
     {
     submission: {

@@ -20,4 +20,9 @@
 .carte-combattant.selectionne { border-color: #3498db; background-color: #ebf5fb; transform: translateY(-5px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
 
 .carte-combattant h4 { margin: 0 0 10px 0; }
+.carte-combattant:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
 .badge-boost { display: inline-block; margin-top: 10px; color: #d35400; font-size: 0.9em; font-weight: bold; }

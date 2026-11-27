@@ -4,33 +4,51 @@
   <form [formRoot]="form">
     <div class="form-group">
       <label>Nom :</label>
-      @if (form.nom().dirty() && form.nom().invalid()) {
-        <ul>
-            @for (error of form.nom().errors(); track error) {
-                <li>{{error.message}}</li>
+        @if (form.nom().errors(); as erreurs) { 
+            @for (erreur of erreurs; track erreur) {
+            <span class="message-erreur">{{ erreur.message }}</span>  
             }
-        </ul>
-      }
+        }
       <input type="text" [formField]="form.nom" >
     </div>
 
     <div class="form-group">
       <label>Description :</label>
+        @if (form.description().errors(); as erreurs) { 
+                @for (erreur of erreurs; track erreur) {
+                <span class="message-erreur">{{ erreur.message }}</span>  
+                }
+            }
       <input type="text" [formField]="form.description">
     </div>
 
     <div class="form-group">
       <label>Points de vie (PV) :</label>
+      @if (form.pv().errors(); as erreurs) { 
+                @for (erreur of erreurs; track erreur) {
+                <span class="message-erreur">{{ erreur.message }}</span>  
+                }
+            }
       <input type="number" [formField]="form.pv">
     </div>
 
     <div class="form-group">
       <label>Force :</label>
+      @if (form.force().errors(); as erreurs) { 
+                @for (erreur of erreurs; track erreur) {
+                <span class="message-erreur">{{ erreur.message }}</span>  
+                }
+            }
       <input type="number" [formField]="form.force">
     </div>
 
     <div class="form-group">
       <label>Vitesse :</label>
+      @if (form.vitesse().errors(); as erreurs) { 
+                @for (erreur of erreurs; track erreur) {
+                <span class="message-erreur">{{ erreur.message }}</span>  
+                }
+            }
       <input type="number" [formField]="form.vitesse">
     </div>
 

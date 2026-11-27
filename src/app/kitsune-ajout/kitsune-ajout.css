@@ -62,3 +62,27 @@
 .btn-submit:hover {
   background-color: #219150;
 }
+
+.message-erreur {
+  display: inline-block;
+  background-color: #fce4e4;
+  color: #c0392b;
+  font-size: 0.85rem;
+  font-weight: bold;
+  padding: 6px 10px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  border-left: 4px solid #e74c3c;
+  animation: apparition 0.2s ease-in-out;
+}
+
+@keyframes apparition {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Optionnel : mettre la bordure de l'input en rouge s'il y a une erreur */
+.form-group input.ng-invalid.ng-touched {
+  border-color: #e74c3c;
+  background-color: #fdf5f5;
+}
