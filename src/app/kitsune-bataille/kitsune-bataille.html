@@ -1,0 +1,32 @@
+<div class="bataille-container">
+  <h2>Arène de Bataille</h2>
+
+  <div class="zone-action">
+    <button class="btn-combat" [disabled]="!boutonActif()" (click)="lancerCombat()">
+      Combat !
+    </button>
+    
+    @if (message(); as msg) {
+      <div class="message-alerte">{{ msg }}</div>
+    }
+  </div>
+
+  <h3>Sélectionnez 2 Kitsunes disponibles</h3>
+  
+  <ul class="grille-combattants">
+    @for (k of disponibles(); track k.nom) {
+      <li 
+        class="carte-combattant" 
+        [class.selectionne]="estSelectionne(k)" 
+        (click)="basculerSelection(k)">
+        <h4>{{ k.nom }}</h4>
+        <p>PV: {{ k.pv }} | Force: {{ k.force }} | Vitesse: {{ k.vitesse }}</p>
+        @if (k.boost) {
+          <span class="badge-boost">🔥 Boost (PV x2)</span>
+        }
+      </li>
+    } @empty {
+      <p>Aucun Kitsune n'est disponible pour combattre (tous en repos).</p>
+    }
+  </ul>
+</div>

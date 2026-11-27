@@ -1,0 +1,23 @@
+@if (kitsune(); as k) {
+  <div class="card">
+    <h2>Détails de {{ k.nom }}</h2>
+    
+    <ul class="attributs-liste">
+      <li><strong>Description :</strong> {{ k.description }}</li>
+      <li><strong>Points de Vie (PV) :</strong> {{ k.pv }}</li>
+      <li><strong>Force :</strong> {{ k.force }}</li>
+      <li><strong>Vitesse :</strong> {{ k.vitesse }}</li>
+      <li><strong>En Repos :</strong> {{ k.enRepos ? 'Oui' : 'Non' }}</li>
+      <li><strong>Victoires :</strong> {{ k.victoires }}</li>
+      <li><strong>Boost :</strong> <span [class.boosted]="k.boost">{{ k.boost ? 'Actif' : 'Inactif' }}</span></li>
+    </ul>
+
+    <button (click)="tenterBoost()" [disabled]="boutonDesactive()">
+      Tenter d'activer le Boost (25% de chance)
+    </button>
+
+    @if (compteurClics() >= 3 && !k.boost) {
+      <p class="error-msg">Échec : Le Kitsune n'a pas pu être boosté après 3 tentatives.</p>
+    }
+  </div>
+}

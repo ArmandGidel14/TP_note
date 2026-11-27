@@ -1,0 +1,31 @@
+<div class="liste-container">
+  <h2>Liste des Kitsunes</h2>
+  
+  <ul class="kitsune-grid">
+    @for (k of liste(); track k.nom) {
+      <li class="kitsune-card" [class.est-booste]="k.boost">
+        <!-- On prépare le lien vers l'écran de détails -->
+        <a [routerLink]="['/details', k.nom]" class="kitsune-link">
+          
+          <div class="infos-principales">
+            <h3>{{ k.nom }}</h3>
+            
+            <!-- Affichage exclusif de l'attribut enRepos -->
+            <span class="badge" [class.repos]="k.enRepos" [class.actif]="!k.enRepos">
+              {{ k.enRepos ? 'En repos' : 'Prêt au combat' }}
+            </span>
+          </div>
+
+          <!-- Style particulier / image si boosté -->
+          @if (k.boost) {
+            <div class="boost-indicateur">
+              🔥 Mode Boosté !
+            </div>
+          }
+        </a>
+      </li>
+    } @empty {
+      <p>Aucun Kitsune disponible.</p>
+    }
+  </ul>
+</div>

@@ -1,59 +1,20 @@
-# TPNote
+## Choix techniques
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.3.0.
+Service (Données) : J'ai centralisé les données des Kitsunes dans un service. Cela permet de partager le même état entre la liste et les détails sans dupliquer l'information.
 
-## Development server
+Écran Liste : J'ai créé un composant dédié pour la liste. Cela permet d'avoir une page d'accueil claire qui ne montre que l'essentiel (nom et statut).
 
-To start a local development server, run:
+Écran Détails : J'ai séparé les détails dans un autre composant. Cela permet d'isoler la logique complexe du "boost" (calcul de probabilité, règles de désactivation) pour ne pas surcharger le code de la liste.
 
-```bash
-ng serve
-```
+Barre de navigation : J'ai utilisé `position: sticky` en CSS pour répondre à la consigne de la maintenir visible au scroll.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Écran Ajout (Formulaire) : J'ai utilisé les Signal Forms pour une gestion réactive de l'état. Les attributs par défaut (enRepos, victoires, boost) sont assignés manuellement lors de la soumission dans le composant, empêchant ainsi l'utilisateur de les modifier lors de la création.
 
-## Code scaffolding
+Écran Introuvable (404) : J'ai créé un composant dédié pour cet écran. Cela permet de l'utiliser à la fois pour les mauvaises URL globales (via la route `**`) et pour les cas où l'utilisateur cherche un Kitsune spécifique qui n'existe pas dans le service.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Module Router : J'ai injecté le module `Router` dans le code pour gérer les redirections dynamiques. Cela permet notamment de renvoyer automatiquement l'utilisateur vers la page "Kitsune introuvable" s'il tape manuellement dans l'URL le nom d'un Kitsune qui n'existe pas.
 
-```bash
-ng generate component component-name
-```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Écran Bataille (Logique métier) : L'état local du combat (Kitsunes sélectionnés, message en cours) est géré dans le composant avec des Signals pour la réactivité. Les calculs de dégâts (PV) sont faits sur des copies d'objets pour ne pas altérer les données initiales, garantissant que les PV reviennent à la normale.
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Mise à jour post-combat : La mise à jour finale de l'état (victoires, pertes de boost, passage `enRepos`) est déléguée au `KitsuneService` après le délai de 3 secondes, qui gère également le retour automatique du perdant après 1 minute via un `setTimeout`.
